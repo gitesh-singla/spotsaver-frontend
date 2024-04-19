@@ -7,7 +7,7 @@ import { UserContextProvider } from "./Contexts/UserContext.jsx";
 import { DateContextProvider } from "./Contexts/DateContext.jsx";
 import { disableReactDevTools } from "@fvilers/disable-react-devtools";
 
-if(process.env.NODE_ENV == "production") disableReactDevTools();
+disableReactDevTools();
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
