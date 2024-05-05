@@ -43,7 +43,6 @@ export default function CreateListing() {
   async function addNewListing(e) {
     e.preventDefault();
 
-    const formData = new FormData();
     const location = {
       lat,
       lon,
@@ -52,15 +51,17 @@ export default function CreateListing() {
     let validate = validateListing(address, slots, price);
     setErrors(validate);
 
-    formData.append("description", description);
-    formData.append("address", address);
-    formData.append("price", price);
-    formData.append("slots", slots);
-    formData.append("type", type);
-    formData.append("startTiming", startTiming);
-    formData.append("endTiming", endTiming);
-    formData.append("location", JSON.stringify(location));
-    formData.append("status", "active");
+    const formData = {
+      description,
+      address,
+      price,
+      slots,
+      type,
+      startTiming,
+      endTiming,
+      status: "active",
+      location,
+    };
 
     // imageFiles.forEach((file) => {
     //   formData.append(`spotImages`, file);
@@ -71,9 +72,6 @@ export default function CreateListing() {
 
       await axios.post("/addlisting", formData, {
         withCredentials: true,
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
       });
       setRedirect("/myspots");
     } catch (error) {
@@ -261,14 +259,14 @@ export default function CreateListing() {
                     min={1}
                     onChange={(e) => {
                       let val = e.target.value;
-                      if(val == null || val <= 0) {
+                      if (val == null || val <= 0) {
                         setErrors({
                           ...errors,
                           slots: "Atleast 1 slot required",
                         });
                       } else {
                         const newError = { ...errors };
-                        delete newError.slots
+                        delete newError.slots;
                         setErrors(newError);
                       }
                       setSlots(val);
