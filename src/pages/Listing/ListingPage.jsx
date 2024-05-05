@@ -6,13 +6,13 @@ import ListMap from "./ListMap";
 import { FadeLoader } from "react-spinners";
 import Booking from "./Booking";
 import ReviewSection from "./ReviewSection";
-import Images from "./Images";
 import phoneSVG from "/phone.svg";
 import starSVG from "/star.svg";
 import stopSVG from "/stop.svg";
 import carSVG from "/car.svg";
 import clockSVG from "/clock.svg";
 import distanceSVG from "/distance.svg";
+// import Images from "./Images";
 
 export default function ListingPage() {
   const { id } = useParams();
@@ -88,7 +88,7 @@ export default function ListingPage() {
             </div>
             <Booking price={spot.price} />
           </div>
-          {spot.images && <Images images={spot.images} isViewerOpen={isViewerOpen} setIsViewerOpen={setIsViewerOpen}/>}
+          {/* {spot.images && <Images images={spot.images} isViewerOpen={isViewerOpen} setIsViewerOpen={setIsViewerOpen}/>} */}
           <h2 className="text-xl font-semibold mb-2">Navigation</h2>
           <div className="h-[2px] bg-gray mb-4"></div>
           <div className="flex gap-4 items-center font-semibold text-lg mb-4">
