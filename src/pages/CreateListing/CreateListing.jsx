@@ -21,8 +21,8 @@ export default function CreateListing() {
   const [endTiming, setEndTiming] = useState();
   const [type, setType] = useState("small");
   const [redirect, setRedirect] = useState("");
-  const [imageFiles, setImageFiles] = useState([]);
   const [errors, setErrors] = useState({});
+  // const [imageFiles, setImageFiles] = useState([]);
 
   const { user } = useContext(userContext);
 
@@ -62,9 +62,9 @@ export default function CreateListing() {
     formData.append("location", JSON.stringify(location));
     formData.append("status", "active");
 
-    imageFiles.forEach((file) => {
-      formData.append(`spotImages`, file);
-    });
+    // imageFiles.forEach((file) => {
+    //   formData.append(`spotImages`, file);
+    // });
 
     try {
       if (Object.keys(validate).length != 0) throw "Invalid input";
@@ -104,23 +104,23 @@ export default function CreateListing() {
     setLon(+data[0].lon);
   }
 
-  const handleImageUpload = (e) => {
-    if (imageFiles.length == 10) return;
-    const maxFileSize = 1024 * 1024; //1MB
-    const selectedImages = Array.from(e.target.files);
-    const filteredImages = selectedImages.filter((image, index) => {
-      if (index >= 10 - imageFiles.length) return false; // to prevent no. of images from exceeding 10
-      return image.size <= maxFileSize;
-    });
-    setImageFiles([...imageFiles, ...filteredImages]);
-  };
+  // const handleImageUpload = (e) => {
+  //   if (imageFiles.length == 10) return;
+  //   const maxFileSize = 1024 * 1024; //1MB
+  //   const selectedImages = Array.from(e.target.files);
+  //   const filteredImages = selectedImages.filter((image, index) => {
+  //     if (index >= 10 - imageFiles.length) return false; // to prevent no. of images from exceeding 10
+  //     return image.size <= maxFileSize;
+  //   });
+  //   setImageFiles([...imageFiles, ...filteredImages]);
+  // };
 
-  const removeImage = (e, index) => {
-    e.preventDefault();
-    const updatedImages = [...imageFiles];
-    updatedImages.splice(index, 1);
-    setImageFiles(updatedImages);
-  };
+  // const removeImage = (e, index) => {
+  //   e.preventDefault();
+  //   const updatedImages = [...imageFiles];
+  //   updatedImages.splice(index, 1);
+  //   setImageFiles(updatedImages);
+  // };
 
   if (!user) {
     return <Navigate to={"/login"} />;
@@ -286,7 +286,7 @@ export default function CreateListing() {
                     <option value="heavy">Heavy</option>
                   </select>
                 </div>
-                <div className="flex flex-col">
+                {/* <div className="flex flex-col">
                   <label className="leading-loose">
                     Upload Images{" "}
                     <span className="text-gray text-base">
@@ -339,7 +339,7 @@ export default function CreateListing() {
                     onChange={(e) => handleImageUpload(e)}
                     accept=".jpg, .jpeg, .png"
                   />
-                </div>
+                </div> */}
                 <div className="flex flex-col">
                   <label className="leading-loose">Location</label>
                   <div className="flex items-center gap-4 mb-4">
