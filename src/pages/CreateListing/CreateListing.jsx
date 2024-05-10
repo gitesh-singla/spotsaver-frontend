@@ -40,6 +40,27 @@ export default function CreateListing() {
     setEndTiming(endDefault);
   }, []);
 
+  async function coordinatesToCity(lat, lon) {
+    let response;
+    try {
+      response = await axios.get(
+        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`
+      );
+      if (response.status === 200) {
+        const data = response.data;
+        if (data.address) {
+          return data.address.state_district.split(" ")[0];
+        } else {
+          throw new Error("Pincode not found");
+        }
+      } else {
+        throw new Error("Data not retreived");
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
   async function addNewListing(e) {
     e.preventDefault();
 
@@ -51,23 +72,26 @@ export default function CreateListing() {
     let validate = validateListing(address, slots, price);
     setErrors(validate);
 
-    const formData = {
-      description,
-      address,
-      price,
-      slots,
-      type,
-      startTiming,
-      endTiming,
-      status: "active",
-      location,
-    };
-
     // imageFiles.forEach((file) => {
     //   formData.append(`spotImages`, file);
     // });
 
     try {
+      const city = await coordinatesToCity(lat, lon);
+
+      const formData = {
+        description,
+        address,
+        price,
+        slots,
+        type,
+        startTiming,
+        endTiming,
+        status: "active",
+        location,
+        city,
+      };
+
       if (Object.keys(validate).length != 0) throw "Invalid input";
 
       await axios.post("/addlisting", formData, {
