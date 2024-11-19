@@ -67,7 +67,7 @@ export default function ReservationInfo({ reservation }) {
           Amount Paid:{" "}
           <span className="font-semibold text-primary">
             {" "}
-            Rs {reservation.cost}/-
+            Rs {reservation.amount}/-
             {/* Rs {reservation.cost}/- */}
           </span>
         </h2>
