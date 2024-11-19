@@ -68,6 +68,7 @@ export default function ReservationInfo({ reservation }) {
           <span className="font-semibold text-primary">
             {" "}
             Rs {reservation.cost}/-
+            {/* Rs {reservation.cost}/- */}
           </span>
         </h2>
         <h2 className="text-gray text-xl">

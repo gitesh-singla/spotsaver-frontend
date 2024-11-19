@@ -39,7 +39,7 @@ function App() {
           <Route path="/listing/:id" element={<ListingPage />}></Route>
         </Routes>
       )}
-      <Footer/>
+      {/* <Footer/> */}
     </>
   );
 }
